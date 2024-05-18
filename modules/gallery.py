@@ -11,15 +11,21 @@ extensions = ['png', 'jpg', 'jpeg']
 
 @gallery.route('/gallery')
 def main_gallery():
-    photos = databaserequest("SELECT * FROM gallery")
+    photos_db = databaserequest("SELECT * FROM gallery")
+    photos = list()
     user_block_photos = list()
     block_photos = list()
-    for photo in photos:
+    for photo in photos_db:
         if photo['hide']:
             block_photos.append(photo['id'])
             if 'id' in session:
                 if photo['author'] == session['id']:
                     user_block_photos.append([photo['id'], photo['title']])
+        else:
+            author = databaserequest("SELECT * FROM accounts WHERE `id`=?", params=[photo['author']], fetchone=True)
+            photo = dict(photo)
+            photo['author_name'] = f"{author['first_name']} {author['last_name']} ({author['nickname']})"
+            photos.append(photo)
     return render_template('gallery/gallery.html', session=session, title="Галерея Ишимуры",
                            photos=photos, user_block_photos=user_block_photos, block_photos=block_photos)
 

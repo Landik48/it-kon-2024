@@ -19,7 +19,7 @@
             {% endfor %}
         </div>
 
-        {% if 'id' in session %}{% if session['acctype'] >= 1 %}<a class="but right" href="/wiki_add">Добавить страницу ➕</a>{% endif %}{% endif %}
+        {% if 'id' in session %}{% if session['acctype'] >= 1 %}<a class="but right" href="/wiki_add?category={{ category_id }}">Добавить страницу ➕</a>{% endif %}{% endif %}
         <a class="but but-red center" href="/wiki">❮&emsp;Назад</a>
     </div>
 {% endblock %}

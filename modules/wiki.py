@@ -28,7 +28,7 @@ def categories(category):
     wikis = databaserequest(f'''SELECT id, title, author, datetime FROM wiki WHERE category='{category}' ''')
     return render_template('wiki/wiki_categories.html', session=session,
                            title=f"{wiki_categories[category]} - База данных Ишимуры", wikis=wikis,
-                           category=wiki_categories[category])
+                           category=wiki_categories[category], category_id=category)
 
 
 @wiki.route('/wiki/<int:id>')
@@ -40,6 +40,10 @@ def get_one_wiki(id):
 
 @wiki.route('/wiki_add', methods=['GET', 'POST'])
 def add_wiki():
+    category = 'characters'
+    if request.args.get('category'):
+        category = request.args.get('category')
+
     if request.method == 'POST':
         try:
             title, content, category = (request.form.get('title'),
@@ -53,7 +57,9 @@ def add_wiki():
             return redirect('/wiki')
         except KeyError:
             abort(413)
-    return render_template('wiki/add.html', session=session, title="Добавление вики-страницы")
+    return render_template('wiki/add.html', session=session, title="Добавление вики-страницы",
+                           category=wiki_categories[category],
+                           category_id=category)
 
 
 @wiki.route('/wiki_edit/<int:id>', methods=['GET', 'POST'])

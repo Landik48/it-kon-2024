@@ -162,6 +162,18 @@ footer {
         width: fit-content;
         display: inline;
     }
+
+    .flex-container {
+        width: 100%;
+
+        div {
+            width: 45%;
+        }
+    }
+
+    .error-block {
+        width: 90%;
+    }
 }
 
 .div-block {
@@ -260,6 +272,7 @@ input:not([type=checkbox]):active, input:not([type=checkbox]):focus, textarea:ac
     padding: 0.5em 2em;
     margin: 0 auto 1em auto;
     text-align: center;
+    border-radius: 0.4em;
     color: #fff;
 
     a {

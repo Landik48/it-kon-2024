@@ -112,16 +112,47 @@ def account_view():
         session['redirect'] = url_for("account_view")
         return redirect(url_for('account_login'))
 
-    if request.method == 'POST':
-        databaserequest("UPDATE accounts SET about = ?, website = ?, vk = ?, tg = ?, discord = ? WHERE id = ?",
-                        params=[request.form.get('about'), request.form.get('website'), request.form.get('vk'),
-                                request.form.get('tg'), request.form.get('discord'), session['id']],
-                        commit=True)
+    account = databaserequest("SELECT * FROM `accounts` WHERE `id`=?", params=[session['id']], fetchone=True)
 
-    account = databaserequest("SELECT * FROM `accounts` WHERE `id`=?", params=[session['id']],
-                              fetchone=True)
-    return render_template('account/settings.html', title="Настройки аккаунта", session=session, acctypes=acctypes,
-                           account=account)
+    if request.method == 'POST':
+        if request.form.get("password"):
+            error = "Неверный пароль!"
+            testpassword = str(hashlib.md5(request.form.get("password").encode(encoding='UTF-8',
+                                                                               errors='strict')).hexdigest())
+
+            if testpassword == account['password']:
+                error = "Новые пароли не совпадают!"
+                if request.form.get("newpassword") == request.form.get("newpassword2"):
+                    newpasswordmd5 = str(hashlib.md5(
+                        request.form.get("newpassword").encode(encoding='UTF-8', errors='strict')).hexdigest())
+                    databaserequest("UPDATE accounts SET password = ? WHERE id = ?",
+                                    params=[newpasswordmd5, session['id']], commit=True)
+                    return account_quit()
+
+            return render_template("account/settings.html", title="Настройки аккаунта",
+                                       session=session, acctypes=acctypes, account=account,
+                                       pass_error=error)
+        else:
+            testaccount = databaserequest("SELECT * FROM accounts WHERE `nickname`=? AND `id`!=?",
+                                          params=[request.form.get('nickname'), session['id']], fetchone=True)
+            if testaccount:
+                return render_template("account/settings.html", title="Настройки аккаунта",
+                                       session=session, acctypes=acctypes, account=account,
+                                       error="Данный никнейм уже занят!")
+
+            databaserequest("UPDATE accounts SET first_name = ?, last_name = ?, nickname = ?, about = ?, "
+                            "website = ?, vk = ?, tg = ?, discord = ? WHERE id = ?",
+                            params=[request.form.get('first_name'), request.form.get('last_name'),
+                                    request.form.get('nickname'), request.form.get('about'),
+                                    request.form.get('website'), request.form.get('vk'), request.form.get('tg'),
+                                    request.form.get('discord'), session['id']], commit=True)
+
+            session['nickname'] = request.form.get('nickname')
+            session['first_name'] = request.form.get('first_name')
+            session['last_name'] = request.form.get('last_name')
+
+    return render_template('account/settings.html', title="Настройки аккаунта", session=session,
+                           acctypes=acctypes, account=account)
 
 
 @app.route('/logout')
@@ -131,7 +162,7 @@ def account_quit():
     session.pop('first_name', None)
     session.pop('last_name', None)
     session.pop('acctype', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('account_login'))
 
 
 @app.route('/profile', defaults={'nickname': None})

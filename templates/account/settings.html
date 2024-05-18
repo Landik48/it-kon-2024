@@ -7,11 +7,30 @@
 
     <div class="center">
         <h2 style="margin-bottom: 0">Добро пожаловать,</h2>
-        <h3 style="margin: 0;font-weight: 400">{{ session['first_name'] }} {{ session['last_name'] }} ({{ session['nickname'] }})</h3>
+        <h3 style="margin: 0;font-weight: 400">{{ account['first_name'] }} {{ account['last_name'] }} ({{ account['nickname'] }})</h3>
         <p style="margin-top: 0">{{ acctypes[session['acctype']] }}</p>
     </div>
 
     <form action="/account" method="post" class="form-block" style="width: 70%">
+        {% if error %}
+            <div class="error-block">
+                {{ error|safe }} 😔
+            </div>
+        {% endif %}
+
+        <label for="nickname">🥸 Никнейм</label>
+        <input id="nickname" name="nickname" type="password" placeholder="Иван" value="{{ account['nickname'] }}" required>
+
+        <div class="flex-container">
+            <div>
+                <label for="first_name">👉 Имя</label>
+                <input id="first_name" name="first_name" type="password" placeholder="Иван" value="{{ account['first_name'] }}" required>
+            </div>
+            <div>
+                <label for="last_name">👉 Фамилия</label>
+                <input id="last_name" name="last_name" type="password" placeholder="Иванов" value="{{ account['last_name'] }}" required>
+            </div>
+        </div>
 
         <label for="about">📄 Описание</label>
         <textarea id="about" name="about" style="resize: none;" placeholder="Интересная информация о Вас">{{ account['about'] }}</textarea>
@@ -29,8 +48,29 @@
         <input id="discord" name="discord" type="text" placeholder="my_discord" value="{{ account['discord'] }}">
 
         <button class="but but-green center" type="submit">Сохранить&emsp;❱</button>
-        <a style="margin-top: 3em" class="but but-red center" href="/logout">Выйти 📛</a>
     </form>
 
-<a class="but but-red center" href="/" style="margin-top: 2em">❮&emsp;На главную</a>
+    <form action="/account" method="post" class="form-block" style="width: 70%;margin-top: 3em">
+        <h3>Изменение пароля</h3>
+
+        {% if pass_error %}
+            <div class="error-block">
+                {{ pass_error|safe }} 😔
+            </div>
+        {% endif %}
+
+        <label for="password">🔐 Текущий пароль</label>
+        <input id="password" name="password" type="text" placeholder="********" required>
+
+        <label for="newpassword">🔐 Новый пароль</label>
+        <input id="newpassword" name="newpassword" type="text" placeholder="********" required>
+
+        <label for="newpassword2">🔐 Повтор нового пароля</label>
+        <input id="newpassword2" name="newpassword2" type="text" placeholder="********" required>
+
+        <button class="but but-green center" type="submit">Изменить&emsp;❱</button>
+    </form>
+
+    <a style="margin-top: 3em" class="but but-red center" href="/logout">Выйти 📛</a>
+    <a class="but but-red center" href="/" style="margin-top: 2em">❮&emsp;На главную</a>
 {% endblock %}

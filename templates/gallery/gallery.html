@@ -33,6 +33,7 @@
 				<h3 class="center">{{ photo['title'] }}</h3>
 				<p class="center" style="margin-bottom: 1em">{{ photo['description'] }}</p>
 				<img class="gallery-img" id="{{ photo['id'] }}-img" src="/{{photo['photo_url']}}">
+				<p class="right">Автор: {{ photo['author_name'] }}</p>
 				<p class="help-text right" style="display: block !important;">нажмите 2 раза на картинку, чтобы рассмотреть её ближе</p>
 
 				{% if 'id' in session %}

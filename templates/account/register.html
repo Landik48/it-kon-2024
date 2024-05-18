@@ -6,27 +6,34 @@
     </div>
 
     <form action="/register" method="post" class="form-block">
+        {% if error %}
+            <div class="error-block">
+                {{ error|safe }}
+            </div>
+        {% endif %}
+
         <label>📧 Электронная почта</label>
         <input name="email" type="email" placeholder="example@yandex.ru" required>
 
         <label>🥸 Никнейм</label>
         <input name="nickname" type="text" placeholder="nickname" required>
 
-        <label>👉 Имя</label>
-        <input name="first_name" type="text" placeholder="Иван" required>
-
-        <label>👉 Фамилия</label>
-        <input name="last_name" type="text" placeholder="Иванов" required>
+        <div class="flex-container">
+            <div>
+                <label>👉 Имя</label>
+                <input name="first_name" type="text" placeholder="Иван" required>
+            </div>
+            <div>
+                <label>👉 Фамилия</label>
+                <input name="last_name" type="text" placeholder="Иванов" required>
+            </div>
+        </div>
 
         <label>🔐 Пароль</label>
-        <input name="password" type="password" placeholder="🤫🤫🤫🤫🤫🤫" required>
+        <input name="password" type="password" placeholder="********" required>
 
         <label>🔐 Повтор пароля</label>
-        <input name="password2" type="password" placeholder="🤫🤫🤫🤫🤫🤫" required>
-
-        {% if error %}
-            {{ error|safe }}<br><br>
-        {% endif %}
+        <input name="password2" type="password" placeholder="********" required>
 
         <button class="but but-with-img center" type="submit">Зарегистрироваться <img src="/static/img/icons/ayzek-magic.gif"/></button>
         <a class="but-link center" href="/auth">Я уже зарегистрирован 😉</a>
