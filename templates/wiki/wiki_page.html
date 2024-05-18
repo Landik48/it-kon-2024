@@ -17,8 +17,8 @@
 
             {% if 'id' in session %}
                 {% if session["acctype"] >= 1 %}
-                    <a class="but" href='/wiki_edit/{{item["id"]}}' style="display: inline-block">Редактировать ✏️</a>
-                    <a class="but but-red" href='/wiki_delete/{{item["id"]}}' style="display: inline-block">Удалить ❌</a>
+                    <a class="but" href='/wiki_edit/{{item["id"]}}' style="display: inline-block">Редактировать <i class="fa-solid fa-pencil"></i></a>
+                    <a class="but but-red" href='/wiki_delete/{{item["id"]}}' style="display: inline-block">Удалить <i class="fa-solid fa-trash"></i></a>
                 {% endif %}
             {% endif %}
         </div>

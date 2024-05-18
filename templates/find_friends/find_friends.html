@@ -8,12 +8,12 @@
     </div>
 
     {% if 'id' in session and not already_create %}
-        <a class="but right" href="/find_friends_actions" style="margin-bottom: 2em">Добавить заявку ➕</a>
+        <a class="but right" href="/find_friends_actions" style="margin-bottom: 2em">Добавить заявку <i class="fa-solid fa-plus"></i></a>
     {% endif %}
 
     {% if user_block_form %}
         <div class="error-block">
-            <p class="with-icon"><font class="icon">⚠️</font><br>Ваша заявка (ID: №{{ user_block_form }}) скрыта Модератором!<br>Пожалуйста <a href="/find_friends_actions?id={{ user_block_form }}">обновите её</a> в соответствии с правилами сообщества.</p>
+            <p class="with-icon"><font class="icon"><i class="fa-solid fa-triangle-exclamation"></i></font><br>Ваша заявка (ID: №{{ user_block_form }}) скрыта Модератором!<br>Пожалуйста <a href="/find_friends_actions?id={{ user_block_form }}">обновите её</a> в соответствии с правилами сообщества.</p>
         </div>
     {% endif %}
 
@@ -23,9 +23,9 @@
                 {% if 'id' in session %}
                     {% if session['acctype'] >= 2 %}
                         <div style="display: inline-block">
-                            <a class="but but-red" style="display: inline-block" href="/find_friends_actions?block={{ form['id'] }}">Скрыть 🚫</a>
+                            <a class="but but-red" style="display: inline-block" href="/find_friends_actions?block={{ form['id'] }}">Скрыть <i class="fa-regular fa-eye-slash"></i></a>
                             {% if session['acctype'] >= 3 %}
-                                <a class="but but-red" style="display: inline-block" href="/find_friends_actions?delete={{ form['id'] }}">Удалить ❌</a>
+                                <a class="but but-red" style="display: inline-block" href="/find_friends_actions?delete={{ form['id'] }}">Удалить <i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </div>
                     {% endif %}
@@ -33,12 +33,12 @@
                 <h3>{{ form['text'] }}</h3>
                 <p>{{ form['desc'] }}</p>
                 <p>{{ form['info'] }}</p>
-                <a class="but-link" style="display: inline" href="/profile/id{{ form['user_id'] }}">Перейти в профиль 👤</a>
+                <a class="but-link" style="display: inline" href="/profile/id{{ form['user_id'] }}">Перейти в профиль <i class="fa-regular fa-user"></i></a>
                 {% if 'id' in session %}
                     {% if form['user_id'] == session['id'] %}
                         <div>
-                            <a class="but" href="/find_friends_actions?id={{ form['id'] }}" style="display: inline-block">Редактировать ✏️</a>
-                            <a class="but but-red" href="/find_friends_actions?delete={{ form['id'] }}" style="display: inline-block">Удалить ❌</a>
+                            <a class="but" href="/find_friends_actions?id={{ form['id'] }}" style="display: inline-block">Редактировать <i class="fa-solid fa-pencil"></i></a>
+                            <a class="but but-red" href="/find_friends_actions?delete={{ form['id'] }}" style="display: inline-block">Удалить <i class="fa-solid fa-trash"></i></a>
                         </div>
                     {% endif %}
                 {% endif %}

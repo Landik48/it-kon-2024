@@ -6,11 +6,11 @@
         <h1>Чат</h1>
     </div>
 
-    <div id="load" style="margin: 0 auto; background-color: #171717">
+    <div id="load" style="margin: 0 auto;">
         <img style="margin: 10% auto;display: block;" src="/static/img/icons/xbox-achievement-dead-chat.gif"/>
     </div>
 
-    <div id="page" style="margin: 0 auto; display: none">
+    <div id="page" style="margin: 0 auto; display: none; background-color: #171717;border-radius: 0.4em;">
         <div id="messages" class="messages">
         </div>
         <hr>
@@ -72,7 +72,7 @@
 
                             const author = data.authors[message[0]];
                             $('#messages').append('<div class="msg-area"><div class="message new-msg-hidden" id="' + message[0] + '">\n' +
-                                        '            <a href="/profile/id'+ message[1] +'">'+ author.first_name + ' ' + author.last_name + ' (' + author.nickname + ')</a>\n' +
+                                        '            <a href="/profile/id'+ message[1] +'"><i class="fa-regular fa-user"></i> '+ author.first_name + ' ' + author.last_name + ' (' + author.nickname + ')</a>\n' +
                                         '            <p lang="ru">' + message[2] + ' </p>\n' +
                                         '            <p>' + message[3] + ' </p>\n' +
                                         '        </div></div>');

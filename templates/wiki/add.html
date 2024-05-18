@@ -3,16 +3,16 @@
 {% block content %}
 <div class="page-title">
     <h1>Добавление страницы</h1>
-    <h3>📚 {{ category }}</h3>
+    <h3><i class="fa-solid fa-layer-group"></i> {{ category|safe }}</h3>
 </div>
 
 <form action="{{url_for('wiki.add_wiki')}}" method="post" class="form-block" style="width: 90%">
-    <label for="title">📌 Заголовок страницы</label>
+    <label for="title"><i class="fa-solid fa-heading"></i> Заголовок страницы</label>
     <input type="text" id="title" name="title" placeholder="О ком/чём информация?" required>
 
     <input type="hidden" name="category" value="{{ category_id }}"/>
 
-    <label for="ckeditor">📄 Содержание страницы</label>
+    <label for="ckeditor"><i class="fa-solid fa-newspaper"></i> Содержание страницы</label>
     {{ckeditor.load()}}
     {{ckeditor.create()}}
 

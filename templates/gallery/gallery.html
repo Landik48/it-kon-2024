@@ -4,16 +4,17 @@
     <div class="page-title">
 		<img src="/static/img/icons/ayzek-wink.gif"/>
 		<h1>Галерея Ишимуры</h1>
+		<p class="help-text" style="display: block !important;"><i class="fa-solid fa-circle-info"></i> нажмите 2 раза на картинку, чтобы рассмотреть её ближе</p>
     </div>
 
 	{% if user_block_photos %}
         <div class="error-block">
-            <p class="with-icon"><font class="icon">⚠️</font><br>Некоторые фото скрыты Модератором:{% for photo in user_block_photos %}<br>• <a href="/gallery_actions?id={{ photo[0] }}">{{ photo[1] }}</a>{% endfor %}<br><br>Пожалуйста обновите их в соответствии с правилами сообщества.</p>
+            <p class="with-icon"><font class="icon"><i class="fa-solid fa-triangle-exclamation"></i></font><br>Некоторые фото скрыты Модератором:{% for photo in user_block_photos %}<br>• <a href="/gallery_actions?id={{ photo[0] }}">{{ photo[1] }}</a>{% endfor %}<br><br>Пожалуйста обновите их в соответствии с правилами сообщества.</p>
         </div>
     {% endif %}
 
 	{% if 'id' in session %}
-        <a class="but right" href="/gallery_actions" style="margin-bottom: 2em">Добавить фото ➕</a>
+        <a class="but right" href="/gallery_actions" style="margin-bottom: 2em">Добавить фото <i class="fa-solid fa-plus"></i></a>
     {% endif %}
 
     <div class="flex-container big-flex-container">
@@ -23,9 +24,9 @@
 				{% if 'id' in session %}
                     {% if session['acctype'] >= 2 %}
                         <div style="display: inline-block">
-                            <a class="but but-red" style="display: inline-block" href="/gallery_actions?block={{ photo['id'] }}">Скрыть 🚫</a>
+                            <a class="but but-red" style="display: inline-block" href="/gallery_actions?block={{ photo['id'] }}">Скрыть <i class="fa-regular fa-eye-slash"></i></a>
                             {% if session['acctype'] >= 3 %}
-                                <a class="but but-red" style="display: inline-block" href="/gallery_actions?delete={{ photo['id'] }}">Удалить ❌</a>
+                                <a class="but but-red" style="display: inline-block" href="/gallery_actions?delete={{ photo['id'] }}">Удалить <i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </div>
                     {% endif %}
@@ -33,14 +34,14 @@
 				<h3 class="center">{{ photo['title'] }}</h3>
 				<p class="center" style="margin-bottom: 1em">{{ photo['description'] }}</p>
 				<img class="gallery-img" id="{{ photo['id'] }}-img" src="/{{photo['photo_url']}}">
-				<p class="right">Автор: {{ photo['author_name'] }}</p>
-				<p class="help-text right" style="display: block !important;">нажмите 2 раза на картинку, чтобы рассмотреть её ближе</p>
+				<p class="right"><i class="fa-regular fa-user"></i> Автор: {{ photo['author_name'] }}</p>
+				<a class="like right" href="#"><i class="fa-solid fa-heart"></i></a>
 
 				{% if 'id' in session %}
 					{% if photo['author'] == session['id'] %}
 						<div>
-							<a class="but" href="/gallery_actions?id={{ photo['id'] }}" style="display: inline-block">Редактировать ✏️</a>
-							<a class="but but-red but-danger" href="/gallery_actions?delete={{ photo['id'] }}" style="display: inline-block">Удалить ❌</a>
+							<a class="but" href="/gallery_actions?id={{ photo['id'] }}" style="display: inline-block">Редактировать <i class="fa-solid fa-pencil"></i></a>
+							<a class="but but-red but-danger" href="/gallery_actions?delete={{ photo['id'] }}" style="display: inline-block">Удалить <i class="fa-solid fa-trash"></i></a>
 						</div>
 					{% endif %}
 				{% endif %}
@@ -65,6 +66,17 @@
 				_oldclick = 0;
 			}
 			else _oldclick = $(this).attr('id');
+		});
+
+		$('.like').click(function() {
+			console.log($(this).css('color'));
+			if($(this).css('color') == 'rgb(221, 79, 70)') {
+				alert('Вы сняли лайк фото №' + $(this).parent().attr('id'));
+				$(this).css('color', 'white');
+			} else {
+				alert('Вы лайкнули фото №' + $(this).parent().attr('id'));
+				$(this).css('color', 'var(--red-color)');
+			}
 		});
 	});
 </script>

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="page-title">
-        <h1>🤗<br>Авторизация</h1>
+        <h1><i class="fa-solid fa-right-to-bracket"></i><br>Авторизация</h1>
     </div>
 
     <form action="/auth" method="post" class="form-block">
@@ -12,15 +12,15 @@
             </div>
         {% endif %}
 
-        <label for="login">👤 Логин (почта или никнейм)</label>
+        <label for="login"><i class="fa-regular fa-user"></i> Логин (почта или никнейм)</label>
         <input id="login" name="login" type="text" placeholder="nickname" required>
 
-        <label for="password">🔐 Пароль</label>
+        <label for="password"><i class="fa-solid fa-unlock-keyhole"></i> Пароль</label>
         <input id="password" name="password" type="password" placeholder="********" required>
 
         {% if redirect %} <input name="redirect" type="hidden" value="{{ redirect }}"> {% endif %}
 
         <button class="but but-with-img center" type="submit">Авторизоваться <img src="/static/img/icons/ayzek-fly.gif"/></button>
-        <a class="but-link center" href="/register">У меня ещё нет аккаунта 🤨</a>
+        <a class="but-link center" href="/register">У меня ещё нет аккаунта <i class="fa-solid fa-user-plus"></i></a>
     </form>
 {% endblock %}

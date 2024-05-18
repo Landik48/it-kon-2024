@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="page-title">
-        <h1>👋<br>Регистрация</h1>
+        <h1><i class="fa-solid fa-user-plus"></i><br>Регистрация</h1>
     </div>
 
     <form action="/register" method="post" class="form-block">
@@ -12,30 +12,30 @@
             </div>
         {% endif %}
 
-        <label>📧 Электронная почта</label>
+        <label><i class="fa-regular fa-envelope"></i> Электронная почта</label>
         <input name="email" type="email" placeholder="example@yandex.ru" required>
 
-        <label>🥸 Никнейм</label>
+        <label><i class="fa-regular fa-user"></i> Никнейм</label>
         <input name="nickname" type="text" placeholder="nickname" required>
 
         <div class="flex-container">
             <div>
-                <label>👉 Имя</label>
+                <label><i class="fa-solid fa-signature"></i> Имя</label>
                 <input name="first_name" type="text" placeholder="Иван" required>
             </div>
             <div>
-                <label>👉 Фамилия</label>
+                <label><i class="fa-solid fa-signature"></i> Фамилия</label>
                 <input name="last_name" type="text" placeholder="Иванов" required>
             </div>
         </div>
 
-        <label>🔐 Пароль</label>
+        <label><i class="fa-solid fa-unlock-keyhole"></i> Пароль</label>
         <input name="password" type="password" placeholder="********" required>
 
-        <label>🔐 Повтор пароля</label>
+        <label><i class="fa-solid fa-unlock-keyhole"></i> Повтор пароля</label>
         <input name="password2" type="password" placeholder="********" required>
 
         <button class="but but-with-img center" type="submit">Зарегистрироваться <img src="/static/img/icons/ayzek-magic.gif"/></button>
-        <a class="but-link center" href="/auth">Я уже зарегистрирован 😉</a>
+        <a class="but-link center" href="/auth">Я уже зарегистрирован <i class="fa-solid fa-right-to-bracket"></i></a>
     </form>
 {% endblock %}

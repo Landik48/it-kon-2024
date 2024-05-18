@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="page-title">
-        <h1>😉<br>Настройки аккаунта</h1>
+        <h1><i class="fa-solid fa-user-gear"></i><br>Настройки аккаунта</h1>
     </div>
 
     <div class="center">
@@ -18,33 +18,33 @@
             </div>
         {% endif %}
 
-        <label for="nickname">🥸 Никнейм</label>
+        <label for="nickname"><i class="fa-regular fa-user"></i> Никнейм</label>
         <input id="nickname" name="nickname" type="password" placeholder="Иван" value="{{ account['nickname'] }}" required>
 
         <div class="flex-container">
             <div>
-                <label for="first_name">👉 Имя</label>
+                <label for="first_name"><i class="fa-solid fa-signature"></i> Имя</label>
                 <input id="first_name" name="first_name" type="password" placeholder="Иван" value="{{ account['first_name'] }}" required>
             </div>
             <div>
-                <label for="last_name">👉 Фамилия</label>
+                <label for="last_name"><i class="fa-solid fa-signature"></i> Фамилия</label>
                 <input id="last_name" name="last_name" type="password" placeholder="Иванов" value="{{ account['last_name'] }}" required>
             </div>
         </div>
 
-        <label for="about">📄 Описание</label>
+        <label for="about"><i class="fa-solid fa-info"></i> Описание</label>
         <textarea id="about" name="about" style="resize: none;" placeholder="Интересная информация о Вас">{{ account['about'] }}</textarea>
 
-        <label for="website">🌐 Личный сайт</label>
+        <label for="website"><i class="fa-solid fa-globe"></i> Личный сайт</label>
         <input id="website" name="website" type="url" placeholder="https://example.com" value="{{ account['website'] }}">
 
-        <label for="vk">🇻‌🇰‌ ВКонтакте</label>
+        <label for="vk"><i class="fa-brands fa-vk"></i> ВКонтакте</label>
         <input id="vk" name="vk" type="url" placeholder="https://vk.com/my_vk" value="{{ account['vk'] }}">
 
-        <label for="tg">✈️ Telegram</label>
+        <label for="tg"><i class="fa-brands fa-telegram"></i> Telegram</label>
         <input id="tg" name="tg" type="url" placeholder="https://t.me/my_tg" value="{{ account['tg'] }}">
 
-        <label for="discord">🎧 Discord</label>
+        <label for="discord"><i class="fa-brands fa-discord"></i> Discord</label>
         <input id="discord" name="discord" type="text" placeholder="my_discord" value="{{ account['discord'] }}">
 
         <button class="but but-green center" type="submit">Сохранить&emsp;❱</button>
@@ -59,18 +59,18 @@
             </div>
         {% endif %}
 
-        <label for="password">🔐 Текущий пароль</label>
+        <label for="password"><i class="fa-solid fa-unlock-keyhole"></i> Текущий пароль</label>
         <input id="password" name="password" type="text" placeholder="********" required>
 
-        <label for="newpassword">🔐 Новый пароль</label>
+        <label for="newpassword"><i class="fa-solid fa-unlock-keyhole"></i> Новый пароль</label>
         <input id="newpassword" name="newpassword" type="text" placeholder="********" required>
 
-        <label for="newpassword2">🔐 Повтор нового пароля</label>
+        <label for="newpassword2"><i class="fa-solid fa-unlock-keyhole"></i> Повтор нового пароля</label>
         <input id="newpassword2" name="newpassword2" type="text" placeholder="********" required>
 
         <button class="but but-green center" type="submit">Изменить&emsp;❱</button>
     </form>
 
-    <a style="margin-top: 3em" class="but but-red center" href="/logout">Выйти 📛</a>
+    <a style="margin-top: 3em" class="but but-red center" href="/logout">Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     <a class="but but-red center" href="/" style="margin-top: 2em">❮&emsp;На главную</a>
 {% endblock %}

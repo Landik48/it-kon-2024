@@ -4,7 +4,10 @@ import datetime
 
 wiki = Blueprint('wiki', __name__, template_folder='templates')
 
-wiki_categories = {'characters': "Персонажи 👱‍", "weapons": "Оружие 🔫", "enemies": "Враги 🧟‍", "gameplay": "Геймплей 🎮"}
+wiki_categories = {'characters': 'Персонажи <i class="fa-solid fa-person"></i>‍',
+                   "weapons": 'Оружие <i class="fa-solid fa-gun"></i>',
+                   "enemies": 'Враги <i class="fa-solid fa-user-ninja"></i>',
+                   "gameplay": 'Геймплей <i class="fa-solid fa-gamepad"></i>'}
 
 
 def databaserequest(req):
@@ -27,7 +30,7 @@ def main_wiki():
 def categories(category):
     wikis = databaserequest(f'''SELECT id, title, author, datetime FROM wiki WHERE category='{category}' ''')
     return render_template('wiki/wiki_categories.html', session=session,
-                           title=f"{wiki_categories[category]} - База данных Ишимуры", wikis=wikis,
+                           title=f"{wiki_categories[category].split(' <')[0]} - База данных Ишимуры", wikis=wikis,
                            category=wiki_categories[category], category_id=category)
 
 

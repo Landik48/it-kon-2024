@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/static/img/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>{{ title|safe }} - Dead Space Community</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <link rel="preconnect" href="https://googleapis.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
+
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/static/scripts/danger-but.js"></script>
-    <title>{{ title }} - Dead Space Community</title>
+    <script src="{{ url_for('static', filename='scripts/danger-but.js') }}"></script>
+
+    <script src="https://kit.fontawesome.com/ae9532b090.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -23,9 +26,9 @@
         </div>
         <div class="right">
             {% if 'id' in session %}
-                <a style="text-align: center" href="/account">{{ session['first_name'] }} {{ session['last_name'] }} ({{ session['nickname'] }})</a>
+                <a style="text-align: center" href="/account"><i class="fa-regular fa-circle-user"></i> {{ session['first_name'] }} {{ session['last_name'] }} ({{ session['nickname'] }})</a>
             {% else %}
-                <a href="/auth{% if request.endpoint %}?redirect={% if request.view_args %}{{ url_for(request.endpoint, **request.view_args) }}{%else%}{{ url_for(request.endpoint) }}{% endif %}{% endif %}" class="but">Авторизоваться 👋</a>
+                <a href="/auth{% if request.endpoint %}?redirect={% if request.view_args %}{{ url_for(request.endpoint, **request.view_args) }}{%else%}{{ url_for(request.endpoint) }}{% endif %}{% endif %}" class="but">Авторизоваться <i class="fa-solid fa-right-to-bracket"></i></a>
             {% endif %}
         </div>
     </header>
