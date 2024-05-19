@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, session, url_for
-from modules.functions import isloggin, databaserequest, cur, get_datetime_now
+from modules.functions import isloggin, databaserequest, cur, get_datetime_now, getuserlikes
 
 news = Blueprint('news', __name__, template_folder='templates')
 
@@ -24,7 +24,7 @@ def news_page(id):
     return render_template('news/news_page.html', session=session,
                            title=f"{cur_news['title']} - Новости", cur_news=cur_news,
                            author=f'{author["first_name"]} {author["last_name"]} ({author["nickname"]})',
-                           author_update=author_update)
+                           author_update=author_update, user_likes=getuserlikes('news'))
 
 
 @news.route('/news_actions', methods=['GET', 'POST'])

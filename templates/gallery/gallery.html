@@ -1,6 +1,7 @@
 {% extends "pagetemplate.html" %}
 
 {% block content %}
+	<script src="{{ url_for ('static', filename='scripts/like.js') }}"></script>
     <div class="page-title">
 		<img src="/static/img/icons/ayzek-wink.gif"/>
 		<h1>Галерея Ишимуры</h1>
@@ -20,7 +21,7 @@
     <div class="flex-container big-flex-container">
 	{% for photo in photos %}
 		{% if photo['id'] not in block_photos %}
-			<div id="{{ photo['id'] }}" class="div-block">
+			<div id="{{ photo['id'] }}" author="{{ photo['author'] }}" class="div-block">
 				{% if 'id' in session %}
                     {% if session['acctype'] >= 2 %}
                         <div style="display: inline-block">
@@ -34,8 +35,8 @@
 				<h3 class="center">{{ photo['title'] }}</h3>
 				<p class="center" style="margin-bottom: 1em">{{ photo['description'] }}</p>
 				<img class="gallery-img" id="{{ photo['id'] }}-img" src="/{{photo['photo_url']}}">
-				<p class="right"><i class="fa-regular fa-user"></i> Автор: {{ photo['author_name'] }}</p>
-				<a class="like right" href="#"><i class="fa-solid fa-heart"></i></a>
+				<p class="help-text"><i class="fa-regular fa-user"></i> Автор: {{ photo['author_name'] }}</p>
+				<a class="like right" href="#" {% if photo['id'] in user_likes %} style="color: var(--red-color)" {% endif %}><i class="fa-solid fa-heart"></i> <span class="like-counter">{{ photo['likes'] }}</span></a>
 
 				{% if 'id' in session %}
 					{% if photo['author'] == session['id'] %}
@@ -68,15 +69,9 @@
 			else _oldclick = $(this).attr('id');
 		});
 
-		$('.like').click(function() {
-			console.log($(this).css('color'));
-			if($(this).css('color') == 'rgb(221, 79, 70)') {
-				alert('Вы сняли лайк фото №' + $(this).parent().attr('id'));
-				$(this).css('color', 'white');
-			} else {
-				alert('Вы лайкнули фото №' + $(this).parent().attr('id'));
-				$(this).css('color', 'var(--red-color)');
-			}
+		$('.like').click(async function () {
+			await sendLike('gallery', $(this).parent().attr('id'), "{{ 'id' in session }}",
+					$(this), $($(this).parent().find('.like-counter')), $(this).parent().attr('author'), "{{ session['id'] }}");
 		});
 	});
 </script>

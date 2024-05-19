@@ -130,8 +130,8 @@ def account_view():
                     return account_quit()
 
             return render_template("account/settings.html", title="Настройки аккаунта",
-                                       session=session, acctypes=acctypes, account=account,
-                                       pass_error=error)
+                                   session=session, acctypes=acctypes, account=account,
+                                   pass_error=error)
         else:
             testaccount = databaserequest("SELECT * FROM accounts WHERE `nickname`=? AND `id`!=?",
                                           params=[request.form.get('nickname'), session['id']], fetchone=True)
@@ -215,6 +215,38 @@ def chat_page():
     return render_template('chat.html', title="Чат", session=session)
 
 
+@app.route('/like', methods=['POST'])
+def like():
+    liketype = request.form.get("type")
+    id = request.form.get('id')
+
+    delete = False
+    if request.form.get('delete') and int(request.form.get('delete')) == 1:
+        delete = True
+    ok = False
+    if liketype == 'gallery':
+        if delete:
+            databaserequest("UPDATE gallery SET likes = likes - 1 WHERE id = ?", params=[id], commit=True)
+        else:
+            databaserequest("UPDATE gallery SET likes = likes + 1 WHERE id = ?", params=[id], commit=True)
+        ok = True
+    elif liketype == 'news':
+        if delete:
+            databaserequest("UPDATE news SET likes = likes - 1 WHERE id = ?", params=[id], commit=True)
+        else:
+            databaserequest("UPDATE news SET likes = likes + 1 WHERE id = ?", params=[id], commit=True)
+        ok = True
+
+    if ok:
+        if delete:
+            databaserequest("DELETE FROM likes WHERE `like_type`=? AND `user_id`=? AND `like_type_id`=?",
+                            params=[liketype, session['id'], id], commit=True)
+        else:
+            databaserequest("INSERT INTO likes(`like_type`, `user_id`, `like_type_id`) VALUES (?, ?, ?)",
+                            params=[liketype, session['id'], id], commit=True)
+    return jsonify(ok=ok)
+
+
 @app.errorhandler(404)
 @app.errorhandler(405)
 def page_not_found(e):
@@ -246,5 +278,5 @@ def create_app():
 
 if __name__ == '__main__':
     create_app()
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 80)), debug=True)  # DEBUG
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 80)), debug=False)  # DEBUG
     con.close()

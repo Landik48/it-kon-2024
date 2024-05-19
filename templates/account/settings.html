@@ -19,16 +19,16 @@
         {% endif %}
 
         <label for="nickname"><i class="fa-regular fa-user"></i> Никнейм</label>
-        <input id="nickname" name="nickname" type="password" placeholder="Иван" value="{{ account['nickname'] }}" required>
+        <input id="nickname" name="nickname" type="text" placeholder="Иван" value="{{ account['nickname'] }}" required>
 
         <div class="flex-container">
             <div>
                 <label for="first_name"><i class="fa-solid fa-signature"></i> Имя</label>
-                <input id="first_name" name="first_name" type="password" placeholder="Иван" value="{{ account['first_name'] }}" required>
+                <input id="first_name" name="first_name" type="text" placeholder="Иван" value="{{ account['first_name'] }}" required>
             </div>
             <div>
                 <label for="last_name"><i class="fa-solid fa-signature"></i> Фамилия</label>
-                <input id="last_name" name="last_name" type="password" placeholder="Иванов" value="{{ account['last_name'] }}" required>
+                <input id="last_name" name="last_name" type="text" placeholder="Иванов" value="{{ account['last_name'] }}" required>
             </div>
         </div>
 

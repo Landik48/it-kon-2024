@@ -2,7 +2,7 @@ import sqlite3
 from datetime import datetime
 
 import pytz
-from flask import session, redirect, url_for, render_template
+from flask import session, redirect, url_for
 
 acctypes = ["Игрок", "Редактор", "Модератор", "Администратор"]
 
@@ -31,6 +31,9 @@ cur.execute(
     """CREATE TABLE IF NOT EXISTS gallery (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, 
     author INTEGER, datetime TEXT, likes INTEGER DEFAULT(0), author_update TEXT DEFAULT (''), 
     datetime_update TEXT DEFAULT (''), photo_url TEXT, hide INTEGER DEFAULT(0));""")
+cur.execute(
+    """CREATE TABLE IF NOT EXISTS likes (id INTEGER PRIMARY KEY AUTOINCREMENT, like_type TEXT, user_id INTEGER, 
+    like_type_id INTEGER);""")
 
 
 def databaserequest(text, params=[], commit=False, fetchone=False, aslist=False):
@@ -64,3 +67,14 @@ def isloggin():
 
 def get_datetime_now(format="%d.%m.%Y %H:%I:%S"):
     return datetime.now(pytz.timezone('Europe/Moscow')).strftime(format)
+
+
+def getuserlikes(liketype):
+    likes = []
+    if isloggin():
+        testlikes = databaserequest("SELECT * FROM likes WHERE `user_id`=? AND `like_type`=?",
+                                    params=[session['id'], liketype])
+        for like in testlikes:
+            likes.append(like['like_type_id'])
+
+    return likes

@@ -2,7 +2,7 @@ import os.path
 from os import path, getcwd
 
 from flask import Blueprint, render_template, request, redirect, session, url_for
-from modules.functions import isloggin, databaserequest, cur, get_datetime_now
+from modules.functions import isloggin, databaserequest, cur, get_datetime_now, getuserlikes
 from werkzeug.utils import secure_filename
 
 gallery = Blueprint('gallery', __name__, template_folder='templates')
@@ -27,7 +27,8 @@ def main_gallery():
             photo['author_name'] = f"{author['first_name']} {author['last_name']} ({author['nickname']})"
             photos.append(photo)
     return render_template('gallery/gallery.html', session=session, title="Галерея Ишимуры",
-                           photos=photos, user_block_photos=user_block_photos, block_photos=block_photos)
+                           photos=photos, user_block_photos=user_block_photos, block_photos=block_photos,
+                           user_likes=getuserlikes('gallery'))
 
 
 @gallery.route('/gallery_actions', methods=['GET', 'POST'])

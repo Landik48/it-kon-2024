@@ -1,6 +1,8 @@
 {% extends 'pagetemplate.html' %}
 
 {% block content %}
+    <script src="{{ url_for ('static', filename='scripts/like.js') }}"></script>
+
     <div class="page-title">
         <h1 style="text-align: left">{{ cur_news['title'] }}</h1>
     </div>
@@ -14,6 +16,7 @@
         <div class="right">
             <p style="display: block" class="help-text">{{ author }} опубликовал {{ cur_news['datetime'] }}</p>
             {% if cur_news['datetime_update']|length > 0 %}<p style="display: block" class="help-text">{{ author_update }} обновил {{ cur_news['datetime_update'] }}</p>{% endif %}
+            <a class="like right" href="#" {% if cur_news['id'] in user_likes %} style="color: var(--red-color)" {% endif %}><i class="fa-solid fa-heart"></i> <span class="like-counter">{{ cur_news['likes'] }}</span></a>
 
             {% if 'id' in session %}
                 {% if session['acctype'] > 0 %}
@@ -27,4 +30,10 @@
 
     <a class="but but-red center" href="/news" style="margin-top: 2em">❮&emsp;Назад</a>
 
+    <script>
+        $('.like').click(async function () {
+            await sendLike('gallery', {{ cur_news['id'] }}, "{{ 'id' in session }}",
+					$(this), $($(this).parent().find('.like-counter')), "{{ cur_news['author'] }}", "{{ session['id'] }}");
+		});
+    </script>
 {% endblock %}
