@@ -337,7 +337,9 @@ a {
     }
 
     .logo-ds {
-        top: 4em;
+        width: 100%;
+        padding-left: 20px;
+        top: 3em;
         position: relative;
         margin: 0 auto 3.5em auto;
     }
