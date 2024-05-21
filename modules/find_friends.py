@@ -49,7 +49,7 @@ def main_find_friends():
                 'desc': 'Играет в ' + ', '.join(games) + f' уже {form["games_exp"]} лет/год(-а)',
                 'info': f'{age} лет, сейчас {tzdt}'
             })
-        return render_template('find_friends/find_friends.html', title="Поиск команды",
+        return render_template('find_friends/find_friends.html', title="Поиск друзей",
                                session=session, forms=forms, already_create=already_create,
                                user_block_form=user_block_form)
 

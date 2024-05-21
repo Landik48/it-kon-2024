@@ -3,11 +3,13 @@
 {% block content %}
 
     <div class="page-title">
-        <h1>Ой, ошибка</h1>
+        <h1><i class="fa-solid fa-triangle-exclamation"></i><br>Ой, ошибка</h1>
     </div>
 
     <div class="form-block">
         <p class="center">{{ error|safe }}</p>
     </div>
+
+    <a class="but but-red center" href="/" style="margin-top: 2em">❮&emsp;На главную</a>
 
 {% endblock %}

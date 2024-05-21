@@ -1,45 +1,54 @@
-{% block content %}
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/static/css/main.css"/>
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <title>Главная - Dead Space Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <script src="https://kit.fontawesome.com/ae9532b090.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>  
         <div class="menu-content-line">
             <a onmouseover="AnimeonHover('.main')" class="main" href=""
-                onmouseout="AnimeoffHover('.main')" id="line">Главная</a>
+                onmouseout="AnimeoffHover('.main')" id="line"><i class="fa-solid fa-house"></i> <p>Главная</p></a>
             <a onmouseover="AnimeonHover('.news')" class="news" href="news" 
-                onmouseout="AnimeoffHover('.news')" id="line">Новости</a>
+                onmouseout="AnimeoffHover('.news')" id="line"><i class="fa-solid fa-newspaper"></i> <p>Новости</p></a>
             <a onmouseover="AnimeonHover('.wiki')" class="wiki" href="wiki"
-                onmouseout="AnimeoffHover('.wiki')" id="line">Википедия</a>
+                onmouseout="AnimeoffHover('.wiki')" id="line"><i class="fa-solid fa-file-lines"></i> <p>Википедия</p></a>
             <a onmouseover="AnimeonHover('.galery')" class="galery" href="gallery"
-                onmouseout="AnimeoffHover('.galery')" id="line">Галерея</a>
+                onmouseout="AnimeoffHover('.galery')" id="line"><i class="fa-regular fa-image"></i> <p>Галерея</p></a>
             <a onmouseover="AnimeonHover('.chat')" class="chat" href="chat"
-                onmouseout="AnimeoffHover('.chat')" id="line">Чат</a>
+                onmouseout="AnimeoffHover('.chat')" id="line"><i class="fa-regular fa-message"></i> <p>Чат</p></a>
             <a onmouseover="AnimeonHover('.search')" class="search" href="find_friends"
-                onmouseout="AnimeoffHover('.search')" id="line">Найти команду</a>
+                onmouseout="AnimeoffHover('.search')" id="line"><i class="fa-solid fa-user-group"></i> <p>Найти друзей</p></a>
             <a onmouseover="AnimeonHover('.auth')" class="auth" href="auth"
-                onmouseout="AnimeoffHover('.auth')" id="line">Авторизация</a>
+                onmouseout="AnimeoffHover('.auth')" id="line"><p>Авторизация</p> <i class="fa-solid fa-right-to-bracket"></i></a>
         </div>
 
-        <input value="Меню" type="button" id="btnmenu">
+        <button type="button" id="btnmenu"><i class="fa-solid fa-bars"></i> Меню</button>
         
         <div class="menu-content-block">
             <h2 id="title-menu">Контент</h2>
             <div class="column">
-                <a href="">Главная</a>
-                <a href="news">Новости</a>
-                <a href="wiki">Википедия</a>
-                <a href="gallery">Галерея</a>
-                <a href="chat">Чат</a>
-                <a href="find_friends">Найти команду</a>
-                <a href="auth">Авторизация</a>
+                <a href=""><i class="fa-solid fa-house"></i> Главная</a>
+                <a href="news"><i class="fa-solid fa-newspaper"></i> Новости</a>
+                <a href="wiki"><i class="fa-solid fa-file-lines"></i> Википедия</a>
+                <a href="gallery"><i class="fa-regular fa-image"></i> Галерея</a>
+                <a href="chat"><i class="fa-regular fa-message"></i> Чат</a>
+                <a href="find_friends"><i class="fa-solid fa-user-group"></i> Найти друзей</a>
+                <a href="auth">Авторизация <i class="fa-solid fa-right-to-bracket"></i></a>
             </div>
         </div>
     </header> 
@@ -48,11 +57,16 @@
 
     <div class="landing-block" id="block1">
         <div class="content1">
-            <h1 id="title">Dead Space</h1>
-            <p id="description">Dead Space - серия игр в жанре survival horror, состоящая из трёх частей и одного ремейка. 
-            Вы играете за Айзека Кларка - простого инженера, который попал в ад из некроморфов и должен бороться за своё выживание. Сражайтесь с чудовищами, решайте различные головоломки и прокладывайте себе путь к спасению через кошмар.
-            А на этом сайте вы можете узнать подробнее об играх и найти себе друзей, чтобы вместе сражаться с некроморфами.
-            Станьте едиными, и сделайте едиными нас.</p>
+            <p id="description">
+                <img class="logo-ds" src="{{ url_for('static', filename='img/dead-space-logo.png') }}">
+                Dead Space - серия игр в жанре survival horror, состоящая из трёх частей и одного ремейка.
+                Вы играете за Айзека Кларка - простого инженера, который попал в ад из некроморфов и должен бороться за своё выживание. Сражайтесь с чудовищами, решайте различные головоломки и прокладывайте себе путь к спасению через кошмар.
+                А на этом сайте вы можете узнать подробнее об играх и найти себе друзей, чтобы вместе сражаться с некроморфами.
+                Станьте едиными, и сделайте едиными нас!
+
+                <a class="official-site" href="https://www.ea.com/ru-ru/games/dead-space" target="_blank">Официальный сайт 🎮</a>
+
+            </p>
             <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/G5JviLRgXes?si=J2ZIROl0OmNgHPhc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         
@@ -61,20 +75,20 @@
 
     <div class="landing-block" id="block2">
         <div class="content2">
-            <h1 id="global_title">Возможности нашего сайта</h1>
+            <h1 id="global_title"><i class="fa-regular fa-star"></i><br>Возможности нашего сайта</h1>
             <div class="blocks">
                 <div class="txt-block" id="txt1">
-                    <h2>Чат и поиск друзей</h2>
+                    <h2><i class="fa-solid fa-user-group" aria-hidden="true"></i><br>Чат и поиск друзей</h2>
                     <p>Общайтесь с другими игроками, делитесь впечатлениями и своими идеями по игре. В условиях эпидемии некроморфов командная работа - ключ к успеху. Находите друзей, с которыми вы можете вместе играть, в том числе в кооперативный режим Dead Space 3. Будьте уверены - вы обязательно найдёте того, с кем у вас общие интересы!</p>
                 </div>
 
                 <div class="txt-block" id="txt2">
-                    <h2>Галерея</h2>
+                    <h2><i class="fa-regular fa-image" aria-hidden="true"></i><br>Галерея</h2>
                     <p>Делитесь своими удивительными кадрами из игр, опубликовав их в галерее. Ни одно новое открытие не должно остаться незамеченным!</p>
                 </div>
                 
                 <div class="txt-block" id="txt3">
-                    <h2>Википедия</h2>
+                    <h2><i class="fa-solid fa-file-lines" aria-hidden="true"></i><br>Википедия</h2>
                     <p>Узнавайте информацию о персонажах, оружии, врагах или элементах геймплея в базе данных Ишимуры. Также можно добавлять по свои страницы, чтобы информации было ещё больше!</p>
                 </div>
             </div>    
@@ -83,32 +97,28 @@
 
     <div class="landing-block" id="block3">
         <div class="content3">
-            <h1>Скриншоты игры</h1>
+            <h1><i class="fa-regular fa-image"></i><br>Скриншоты игры</h1>
             <div class="slider-container">
-                <div class="slider">
-                  <img src="/static/img/main/screen1.jpg">
-                  <img src="/static/img/main/screen2.jpeg">
-                  <img src="/static/img/main/screen3.jpg">
-                  <img src="/static/img/main/screen4.webp">
-                  <img src="/static/img/main/screen5.png">
-                  <img src="/static/img/main/screen6.jpg">
-                  <img src="/static/img/main/screen7.jpeg">
-                  <img src="/static/img/main/screen8.jpeg">
+                <div id="owl" class="owl-carousel">
+                  <img class="item" src="/static/img/main/screen1.jpg">
+                  <img class="item" src="/static/img/main/screen2.jpeg">
+                  <img class="item" src="/static/img/main/screen3.jpg">
+                  <img class="item" src="/static/img/main/screen4.webp">
+                  <img class="item" src="/static/img/main/screen5.png">
+                  <img class="item" src="/static/img/main/screen6.jpg">
+                  <img class="item" src="/static/img/main/screen7.jpeg">
+                  <img class="item" src="/static/img/main/screen8.jpeg">
                 </div>
-                <button class="prev-button" aria-label="Посмотреть предыдущий слайд">&lt</button>
-                <button class="next-button" aria-label="Посмотреть следующий слайд">&gt</button>
               </div>
             <div class="footer">
                 <hr class="text-muted">
-                <p class="text-muted" style="text-align: center">
-                © 2024 
-                <a target="_blank" href="https://github.com/the-code-factory-team">The Code Factory</a></p>
+                <p class="text-muted" style="text-align: center">© 2024 <a target="_blank" href="https://github.com/the-code-factory-team">The Code Factory</a></p>
             </div>
         </div>
     </div>
     
-    <script src="/static/scripts/anime.min.js"></script>
-    <script src="/static/scripts/main.js"></script>
+    <script src="{{ url_for('static', filename='scripts/typed.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/anime.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 </body>
 </html>
-{% endblock %}

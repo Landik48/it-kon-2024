@@ -251,7 +251,7 @@ def like():
 @app.errorhandler(405)
 def page_not_found(e):
     return render_template('error.html', title="Страница не найдена", session=session,
-                           error='Извините, мы не можем найти данную страницу!'), 404
+                           error='Извините, мы не можем найти данную страницу! <i class="fa-regular fa-eye-slash"></i>'), 404
 
 
 @app.errorhandler(500)
@@ -259,7 +259,7 @@ def on_error(e):
     print("ОШИБКА:\n")
     print(traceback.format_exc())
     return render_template('error.html', title="Произошла ошибка", session=session,
-                           error=f'Извините, произошла ошибка при выполнении запроса!'), 500
+                           error=f'Извините, произошла ошибка при выполнении запроса! <i class="fa-solid fa-bug"></i>'), 500
 
 
 @app.errorhandler(413)

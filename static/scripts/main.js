@@ -1,39 +1,4 @@
-//Слайдер
-const slider = document.querySelector('.slider');
-const prevButton = document.querySelector('.prev-button');
-const nextButton = document.querySelector('.next-button');
-const slides = Array.from(slider.querySelectorAll('img'));
-const slideCount = slides.length;
-let slideIndex = 0;
-
-prevButton.addEventListener('click', showPreviousSlide);
-nextButton.addEventListener('click', showNextSlide);
-
-function showPreviousSlide() {
-  slideIndex = (slideIndex - 1 + slideCount) % slideCount;
-  updateSlider();
-}
-
-setInterval(() => {
-    showNextSlide()
-}, 7000)
-
-function showNextSlide() {
-  slideIndex = (slideIndex + 1) % slideCount;
-  updateSlider();
-}
-
-function updateSlider() {
-  slides.forEach((slide, index) => {
-    if (index === slideIndex) {    
-      slide.style.display = 'block';
-    } else {
-      slide.style.display = 'none';
-    }
-  });
-}
-
-//Меню  
+//Меню
 let menu = document.querySelector('.menu-content-block');
 btnmenu.onclick = function() {
     if (menu.style.display === "block"){
@@ -54,6 +19,7 @@ btnmenu.onclick = function() {
           });}
 }
 
+let flag;
 //Подсветка
 document.addEventListener("DOMContentLoaded", function() {
 window.addEventListener("scroll", function() {
@@ -83,29 +49,32 @@ window.addEventListener("scroll", function() {
 anime({
     targets: ["#line", '#btnmenu'],
     translateY: [-200, 0],
-    delay: 500,
+    delay: 200,
     opacity: [{ 
         value: 0,
-        duration: 500},{
+        duration: 300},{
         value: 1}],
     easing: 'easeInOutQuad',
-    duration: 1000
+    duration: 900
   });
 
 function block1() {
     update()
+    
     anime({
-        targets: "#title",
+        targets: '#video',
+        translateX: [500, 0],
+        delay: 500,
         opacity: [{ 
             value: 0,
             duration: 500},{
             value: 1}],
         easing: 'easeInOutQuad',
+        duration: 1000
       });
-      anime({
-        targets: '#video',
-        translateX: [500, 0],
-        delay: 1500,
+
+    anime({
+        targets: '#description',
         opacity: [{ 
             value: 0,
             duration: 500},{
@@ -120,7 +89,7 @@ function block2() {
     anime({
         targets: '#global_title',
         translateY: [-400, 0],
-        delay: 2500,
+        // delay: 500,
         opacity: [{ 
             value: 0,
             duration: 500},{
@@ -131,18 +100,17 @@ function block2() {
 
     let lst_blocks = ['#txt1', '#txt2', '#txt3']
     for (let i = 1; i-1 < lst_blocks.length; i++) {
-        setTimeout(() => {
-            anime({
-                targets: lst_blocks[i-1],
-                translateY: [600, 0],
-                opacity: [{ 
-                    value: 0,
-                    duration: 500},{
-                    value: 1}],
-                easing: 'easeInOutQuad',
-                duration: 1000
-            });
-        }, 600*i)
+        anime({
+            delay: 500,
+            targets: lst_blocks[i-1],
+            translateY: [600, 0],
+            opacity: [{ 
+                value: 0,
+                duration: 550},{
+                value: 1}],
+            easing: 'easeInOutQuad',
+            duration: 1000
+        });
     }
 }
 
@@ -170,13 +138,12 @@ function AnimeoffHover(element){
 
 function update() {
     let lst_els = [
-    document.querySelector("#video"),
-    document.querySelector("#title"),
-    document.querySelector('#global_title'),
-    document.querySelector('#txt1'),
-    document.querySelector('#txt2'),
-    document.querySelector('#txt3'),
-    //document.querySelector('.slider-container')
+        document.querySelector("#video"),
+        document.querySelector('#global_title'),
+        document.querySelector('#txt1'),
+        document.querySelector('#txt2'),
+        document.querySelector('#txt3'),
+        document.querySelector('#description')
     ]
 
     function zeroing(selectors) {
@@ -184,11 +151,23 @@ function update() {
             selector.style.opacity = '0'
         }
     }
-    
     zeroing(lst_els)
 }
 
 //Инициализация при старте
 block1()
-updateSlider()
-var flag = 'block1'
+flag = 'block1';
+
+$(document).ready(function() {
+    $("#owl").owlCarousel({
+        loop:true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause:true,
+        autoplay:true,
+
+        items: 1,
+        itemsDesktop: [1199, 1],
+        itemsDesktopSmall: [979, 1]
+
+    });
+});
